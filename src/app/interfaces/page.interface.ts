@@ -7,6 +7,7 @@ export interface PageInterface {
     module?: any;
     pipe?: any;
     class?: any;
+    event?: any;
     interface?: any;
     directive?: any;
     injectable?: any;

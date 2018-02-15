@@ -421,6 +421,10 @@ export class Application {
             actions.push(() => this.prepareClasses());
         }
 
+        if (diffCrawledData.events.length > 0) {
+            actions.push(() => this.prepareEvents());
+        }
+
         if (diffCrawledData.interfaces.length > 0) {
             actions.push(() => this.prepareInterfaces());
         }
@@ -507,6 +511,10 @@ export class Application {
 
         if (this.dependenciesEngine.classes.length > 0) {
             actions.push(() => { return this.prepareClasses(); });
+        }
+
+        if (this.dependenciesEngine.events.length > 0) {
+            actions.push(() => { return this.prepareEvents(); });
         }
 
         if (this.dependenciesEngine.interfaces.length > 0) {
@@ -757,6 +765,39 @@ export class Application {
                         id: this.configuration.mainData.classes[i].id,
                         context: 'class',
                         class: this.configuration.mainData.classes[i],
+                        depth: 1,
+                        pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
+                    });
+                    i++;
+                    loop();
+                } else {
+                    resolve();
+                }
+            };
+            loop();
+        });
+    }
+
+    public prepareEvents = (someEvents?) => {
+        logger.info('Prepare events');
+        this.configuration.mainData.events = (someEvents) ? someEvents : this.dependenciesEngine.getEvents();
+
+        return new Promise((resolve, reject) => {
+            let i = 0;
+            let len = this.configuration.mainData.events.length;
+            let loop = () => {
+                if (i < len) {
+                    if ($markdownengine.hasNeighbourReadmeFile(this.configuration.mainData.events[i].file)) {
+                        logger.info(` ${this.configuration.mainData.events[i].name} has a README file, include it`);
+                        let readme = $markdownengine.readNeighbourReadmeFile(this.configuration.mainData.events[i].file);
+                        this.configuration.mainData.events[i].readme = marked(readme);
+                    }
+                    this.configuration.addPage({
+                        path: 'events',
+                        name: this.configuration.mainData.events[i].name + 'Event',
+                        id: this.configuration.mainData.events[i].id,
+                        context: 'event',
+                        event: this.configuration.mainData.events[i],
                         depth: 1,
                         pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
                     });

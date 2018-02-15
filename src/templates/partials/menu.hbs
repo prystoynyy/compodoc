@@ -200,6 +200,33 @@
         </li>
         {{/if}}
 
+        {{#if events}}
+        <li class="chapter">
+            <div class="simple menu-toggler" data-toggle="collapse"
+                {{#compare menu "===" 'normal' }}
+                    data-target="#events-links"
+                {{else}}
+                    data-target="#xs-events-links"
+                {{/compare}}>
+                <span class="fa fa-fw fa-file-code-o"></span>
+                <span>Events</span>
+                <span class="fa {{#isNotToggle 'events'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+            </div>
+            <ul class="links collapse {{#isNotToggle 'events'}}in{{/isNotToggle}}"
+                {{#compare menu "===" 'normal' }}
+                    id="events-links"
+                {{else}}
+                    id="xs-events-links"
+                {{/compare}}>
+                {{#each events}}
+                    <li class="link">
+                        <a href="{{relativeURL ../depth 'events'}}events/{{name}}Event.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/if}}
+
         {{#if injectables}}
         <li class="chapter">
             <div class="simple menu-toggler" data-toggle="collapse"

@@ -34,6 +34,7 @@ export class DependenciesEngine {
     public routes: RouteInterface;
     public pipes: Object[];
     public classes: Object[];
+    public events: Object[];
     public miscellaneous: MiscellaneousData;
 
     private angularApiUtil: AngularApiUtil = new AngularApiUtil();
@@ -120,6 +121,7 @@ export class DependenciesEngine {
         this.interfaces = _.sortBy(this.rawData.interfaces, ['name']);
         this.pipes = _.sortBy(this.rawData.pipes, ['name']);
         this.classes = _.sortBy(this.rawData.classes, ['name']);
+        this.events = _.sortBy(this.rawData.events, ['name']);
         this.miscellaneous = this.rawData.miscellaneous;
         this.prepareMiscellaneous();
         this.updateModulesDeclarationsExportsTypes();
@@ -329,6 +331,10 @@ export class DependenciesEngine {
 
     public getClasses() {
         return this.classes;
+    }
+
+    public getEvents() {
+        return this.events;
     }
 
     public getMiscellaneous() {

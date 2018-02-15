@@ -38,6 +38,8 @@ export class HtmlEngine {
             'pipe',
             'classes',
             'class',
+            'events',
+            'event',
             'interface',
             'routes',
             'index',

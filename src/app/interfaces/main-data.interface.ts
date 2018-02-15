@@ -20,6 +20,7 @@ export interface MainDataInterface {
     additionalPages: any;
     pipes: any;
     classes: any;
+    events: any;
     interfaces: any;
     components: any;
     directives: any;
