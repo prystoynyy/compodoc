@@ -36,6 +36,10 @@ export class ClassHelper {
         }
     }
 
+    private getDecoratorName(decorator): string {
+        return decorator.expression.expression.text;
+    }
+
     private visitTypeName(typeName: ts.Identifier) {
       if(typeName.text) {
         return typeName.text;
@@ -231,6 +235,7 @@ export class ClassHelper {
                         jsdoctags: jsdoctags
                     }];
                 } else {
+                    // we have a class, that has decorators, but not a specific Angular one
                     members = this.visitMembers(classDeclaration.members, sourceFile);
                     return [{
                         description,
@@ -242,7 +247,10 @@ export class ClassHelper {
                         jsdoctags: jsdoctags,
                         extends: extendsElement,
                         implements: implementsElements,
-                        accessors: members.accessors
+                        accessors: members.accessors,
+                        // simply pass decorators along
+                        decorators: classDeclaration.decorators,
+                        decoratorNames: classDeclaration.decorators.map(this.getDecoratorName)
                     }];
                 }
             }
