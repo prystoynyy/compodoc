@@ -236,9 +236,11 @@ export class Dependencies {
         }
         this.debug(deps);
         outputSymbols.classes.push(deps);
-        // TODO: figure out, how to access decorators to separate Events from classes
-        // every class is an event for testing...
-        outputSymbols.events.push(deps);
+        // TODO: fix generating logic... i.e. Events should be Events and classes classes...
+        // classes having an @Event decorator are Events, the rest are just classes...
+        if (IO.decoratorNames && IO.decoratorNames.indexOf('Event') > -1) {
+            outputSymbols.events.push(deps);
+        }
     }
 
     private getSourceFileDecorators(srcFile: ts.SourceFile, outputSymbols: any): void {
