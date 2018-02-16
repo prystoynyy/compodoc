@@ -794,10 +794,10 @@ export class Application {
                     }
                     this.configuration.addPage({
                         path: 'events',
-                        name: this.configuration.mainData.events[i].name + 'Event',
+                        name: this.configuration.mainData.events[i].name,
                         id: this.configuration.mainData.events[i].id,
                         context: 'event',
-                        event: this.configuration.mainData.events[i],
+                        class: this.configuration.mainData.events[i],
                         depth: 1,
                         pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
                     });
