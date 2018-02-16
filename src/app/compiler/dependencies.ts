@@ -236,9 +236,16 @@ export class Dependencies {
         }
         this.debug(deps);
         outputSymbols.classes.push(deps);
+
+        // this is our own hacked logic for classifying ngRx classes by their baseClass and tagging Decorators
+        // for examples see -> test/src/sample-files/test-ngrx-{*}-action.class.ts
+
+        const _hasDecorator = (decorator) => IO.decoratorNames && IO.decoratorNames.indexOf(decorator) > -1;
+        const _extends = (baseClass) => IO.extends && IO.extends === baseClass;
+
         // TODO: fix generating logic... i.e. Events should be Events and classes classes...
         // classes having an @Event decorator are Events, the rest are just classes...
-        if (IO.decoratorNames && IO.decoratorNames.indexOf('Event') > -1) {
+        if (_hasDecorator('Event') && _extends('EventAction')) {
             outputSymbols.events.push(deps);
         }
     }
