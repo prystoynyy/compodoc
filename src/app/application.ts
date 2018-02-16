@@ -425,6 +425,14 @@ export class Application {
             actions.push(() => this.prepareEvents());
         }
 
+        if (diffCrawledData.commands.length > 0) {
+            actions.push(() => this.prepareCommands());
+        }
+
+        if (diffCrawledData.documents.length > 0) {
+            actions.push(() => this.prepareDocuments());
+        }
+
         if (diffCrawledData.interfaces.length > 0) {
             actions.push(() => this.prepareInterfaces());
         }
@@ -515,6 +523,14 @@ export class Application {
 
         if (this.dependenciesEngine.events.length > 0) {
             actions.push(() => { return this.prepareEvents(); });
+        }
+
+        if (this.dependenciesEngine.documents.length > 0) {
+            actions.push(() => { return this.prepareDocuments(); });
+        }
+
+        if (this.dependenciesEngine.commands.length > 0) {
+            actions.push(() => { return this.prepareCommands(); });
         }
 
         if (this.dependenciesEngine.interfaces.length > 0) {
@@ -794,7 +810,7 @@ export class Application {
                     }
                     this.configuration.addPage({
                         path: 'events',
-                        name: this.configuration.mainData.events[i].name,
+                        name: this.configuration.mainData.events[i].name + 'Event',
                         id: this.configuration.mainData.events[i].id,
                         context: 'event',
                         class: this.configuration.mainData.events[i],
@@ -809,7 +825,73 @@ export class Application {
             };
             loop();
         });
-    }
+    };
+
+    public prepareDocuments = (someDocuments?) => {
+        logger.info('Prepare documents');
+        this.configuration.mainData.documents = (someDocuments) ? someDocuments : this.dependenciesEngine.getEvents();
+
+        return new Promise((resolve, reject) => {
+            let i = 0;
+            let len = this.configuration.mainData.documents.length;
+            let loop = () => {
+                if (i < len) {
+                    if ($markdownengine.hasNeighbourReadmeFile(this.configuration.mainData.documents[i].file)) {
+                        logger.info(` ${this.configuration.mainData.documents[i].name} has a README file, include it`);
+                        let readme = $markdownengine.readNeighbourReadmeFile(this.configuration.mainData.documents[i].file);
+                        this.configuration.mainData.documents[i].readme = marked(readme);
+                    }
+                    this.configuration.addPage({
+                        path: 'documents',
+                        name: this.configuration.mainData.documents[i].name,
+                        id: this.configuration.mainData.documents[i].id,
+                        context: 'document',
+                        class: this.configuration.mainData.documents[i],
+                        depth: 1,
+                        pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
+                    });
+                    i++;
+                    loop();
+                } else {
+                    resolve();
+                }
+            };
+            loop();
+        });
+    };
+
+    public prepareCommands = (someCommands?) => {
+            logger.info('Prepare commands');
+            this.configuration.mainData.commands = (someCommands) ? someCommands : this.dependenciesEngine.getEvents();
+
+            return new Promise((resolve, reject) => {
+                let i = 0;
+                let len = this.configuration.mainData.commands.length;
+                let loop = () => {
+                    if (i < len) {
+                        if ($markdownengine.hasNeighbourReadmeFile(this.configuration.mainData.commands[i].file)) {
+                            logger.info(` ${this.configuration.mainData.commands[i].name} has a README file, include it`);
+                            let readme = $markdownengine.readNeighbourReadmeFile(this.configuration.mainData.commands[i].file);
+                            this.configuration.mainData.commands[i].readme = marked(readme);
+                        }
+                        this.configuration.addPage({
+                            path: 'commands',
+                            name: this.configuration.mainData.commands[i].name,
+                            id: this.configuration.mainData.commands[i].id,
+                            context: 'document',
+                            class: this.configuration.mainData.commands[i],
+                            depth: 1,
+                            pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
+                        });
+                        i++;
+                        loop();
+                    } else {
+                        resolve();
+                    }
+                };
+                loop();
+            });
+        }
 
     public prepareInterfaces(someInterfaces?) {
         logger.info('Prepare interfaces');

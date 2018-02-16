@@ -8,6 +8,8 @@ export interface PageInterface {
     pipe?: any;
     class?: any;
     event?: any;
+    document?: any;
+    command?: any;
     interface?: any;
     directive?: any;
     injectable?: any;

@@ -227,6 +227,33 @@
         </li>
         {{/if}}
 
+        {{#if documents}}
+        <li class="chapter">
+            <div class="simple menu-toggler" data-toggle="collapse"
+                {{#compare menu "===" 'normal' }}
+                    data-target="#documents-links"
+                {{else}}
+                    data-target="#xs-documents-links"
+                {{/compare}}>
+                <span class="fa fa-fw fa-file-code-o"></span>
+                <span>documents</span>
+                <span class="fa {{#isNotToggle 'documents'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+            </div>
+            <ul class="links collapse {{#isNotToggle 'documents'}}in{{/isNotToggle}}"
+                {{#compare menu "===" 'normal' }}
+                    id="documents-links"
+                {{else}}
+                    id="xs-documents-links"
+                {{/compare}}>
+                {{#each documents}}
+                    <li class="link">
+                        <a href="{{relativeURL ../depth 'documents'}}documents/{{name}}" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/if}}
+
         {{#if injectables}}
         <li class="chapter">
             <div class="simple menu-toggler" data-toggle="collapse"

@@ -96,6 +96,20 @@
                         {{~> event data ~}}
                    {{/compare}}
 
+                   {{#compare data.context "===" 'commands'}}
+                        {{~> commands data ~}}
+                   {{/compare}}
+                   {{#compare data.context "===" 'command'}}
+                        {{~> command data ~}}
+                   {{/compare}}
+
+                   {{#compare data.context "===" 'documents'}}
+                        {{~> documents data ~}}
+                   {{/compare}}
+                   {{#compare data.context "===" 'document'}}
+                        {{~> document data ~}}
+                   {{/compare}}
+
                    {{#compare data.context "===" 'interface'}}
                         {{~> interface data ~}}
                    {{/compare}}

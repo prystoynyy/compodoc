@@ -29,6 +29,8 @@ export class Configuration implements ConfigurationInterface {
         pipes: [],
         classes: [],
         events: [],
+        commands: [],
+        documents: [],
         interfaces: [],
         components: [],
         directives: [],

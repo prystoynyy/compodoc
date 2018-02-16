@@ -9,6 +9,8 @@ export interface ParsedData {
     pipes;
     classes;
     events;
+    documents;
+    commands;
     miscellaneous;
     routesTree;
 }

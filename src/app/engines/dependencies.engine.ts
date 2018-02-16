@@ -35,6 +35,8 @@ export class DependenciesEngine {
     public pipes: Object[];
     public classes: Object[];
     public events: Object[];
+    public documents: Object[];
+    public commands: Object[];
     public miscellaneous: MiscellaneousData;
 
     private angularApiUtil: AngularApiUtil = new AngularApiUtil();
@@ -122,6 +124,8 @@ export class DependenciesEngine {
         this.pipes = _.sortBy(this.rawData.pipes, ['name']);
         this.classes = _.sortBy(this.rawData.classes, ['name']);
         this.events = _.sortBy(this.rawData.events, ['name']);
+        this.commands = _.sortBy(this.rawData.commands, ['name']);
+        this.documents = _.sortBy(this.rawData.documents, ['name']);
         this.miscellaneous = this.rawData.miscellaneous;
         this.prepareMiscellaneous();
         this.updateModulesDeclarationsExportsTypes();
@@ -334,6 +338,14 @@ export class DependenciesEngine {
     }
 
     public getEvents() {
+        return this.events;
+    }
+
+    public getCommands() {
+        return this.events;
+    }
+
+    public getDocuments() {
         return this.events;
     }
 
