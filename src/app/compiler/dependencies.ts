@@ -246,7 +246,8 @@ export class Dependencies {
         // TODO: fix generating logic... i.e. Events should be Events and classes classes...
         // classes having an @Event decorator are Events, the rest are just classes...
         if (_hasDecorator('Event') && _extends('EventAction')) {
-            outputSymbols.events.push(deps);
+            // adjust id for events...
+            outputSymbols.events.push({...deps, id: 'event-' + name + '-' + Date.now()});
         }
     }
 
