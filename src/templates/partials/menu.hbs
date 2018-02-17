@@ -200,87 +200,6 @@
         </li>
         {{/if}}
 
-        {{#if events}}
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                {{#compare menu "===" 'normal' }}
-                    data-target="#events-links"
-                {{else}}
-                    data-target="#xs-events-links"
-                {{/compare}}>
-                <span class="fa fa-fw fa-file-code-o"></span>
-                <span>Events</span>
-                <span class="fa {{#isNotToggle 'events'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
-            </div>
-            <ul class="links collapse {{#isNotToggle 'events'}}in{{/isNotToggle}}"
-                {{#compare menu "===" 'normal' }}
-                    id="events-links"
-                {{else}}
-                    id="xs-events-links"
-                {{/compare}}>
-                {{#each events}}
-                    <li class="link">
-                        <a href="{{relativeURL ../depth 'events'}}events/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
-                    </li>
-                {{/each}}
-            </ul>
-        </li>
-        {{/if}}
-
-        {{#if documents}}
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                {{#compare menu "===" 'normal' }}
-                    data-target="#documents-links"
-                {{else}}
-                    data-target="#xs-documents-links"
-                {{/compare}}>
-                <span class="fa fa-fw fa-file-code-o"></span>
-                <span>Documents</span>
-                <span class="fa {{#isNotToggle 'documents'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
-            </div>
-            <ul class="links collapse {{#isNotToggle 'documents'}}in{{/isNotToggle}}"
-                {{#compare menu "===" 'normal' }}
-                    id="documents-links"
-                {{else}}
-                    id="xs-documents-links"
-                {{/compare}}>
-                {{#each documents}}
-                    <li class="link">
-                        <a href="{{relativeURL ../depth 'documents'}}documents/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
-                    </li>
-                {{/each}}
-            </ul>
-        </li>
-        {{/if}}
-
-        {{#if commands}}
-        <li class="chapter">
-            <div class="simple menu-toggler" data-toggle="collapse"
-                {{#compare menu "===" 'normal' }}
-                    data-target="#commands-links"
-                {{else}}
-                    data-target="#xs-documents-links"
-                {{/compare}}>
-                <span class="fa fa-fw fa-file-code-o"></span>
-                <span>Commands</span>
-                <span class="fa {{#isNotToggle 'commands'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
-            </div>
-            <ul class="links collapse {{#isNotToggle 'commands'}}in{{/isNotToggle}}"
-                {{#compare menu "===" 'normal' }}
-                    id="commands-links"
-                {{else}}
-                    id="xs-commands-links"
-                {{/compare}}>
-                {{#each commands}}
-                    <li class="link">
-                        <a href="{{relativeURL ../depth 'commands'}}commands/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
-                    </li>
-                {{/each}}
-            </ul>
-        </li>
-        {{/if}}
-
         {{#if injectables}}
         <li class="chapter">
             <div class="simple menu-toggler" data-toggle="collapse"
@@ -388,6 +307,91 @@
             </ul>
         </li>
         {{/if}}
+
+        <hr>
+
+        {{#if events}}
+            <li class="chapter">
+                <div class="simple menu-toggler" data-toggle="collapse"
+                    {{#compare menu "===" 'normal' }}
+                     data-target="#events-links"
+                    {{else}}
+                     data-target="#xs-events-links"
+                    {{/compare}}>
+                    <span class="fa fa-fw fa-hourglass-o"></span>
+                    <span>ngRx Events</span>
+                    <span class="fa {{#isNotToggle 'events'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+                </div>
+                <ul class="links collapse {{#isNotToggle 'events'}}in{{/isNotToggle}}"
+                    {{#compare menu "===" 'normal' }}
+                    id="events-links"
+                    {{else}}
+                    id="xs-events-links"
+                    {{/compare}}>
+                    {{#each events}}
+                        <li class="link">
+                            <a href="{{relativeURL ../depth 'events'}}events/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/if}}
+
+        {{#if documents}}
+            <li class="chapter">
+                <div class="simple menu-toggler" data-toggle="collapse"
+                    {{#compare menu "===" 'normal' }}
+                     data-target="#documents-links"
+                    {{else}}
+                     data-target="#xs-documents-links"
+                    {{/compare}}>
+                    <span class="fa fa-fw fa-file-o"></span>
+                    <span>ngRx Documents</span>
+                    <span class="fa {{#isNotToggle 'documents'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+                </div>
+                <ul class="links collapse {{#isNotToggle 'documents'}}in{{/isNotToggle}}"
+                    {{#compare menu "===" 'normal' }}
+                    id="documents-links"
+                    {{else}}
+                    id="xs-documents-links"
+                    {{/compare}}>
+                    {{#each documents}}
+                        <li class="link">
+                            <a href="{{relativeURL ../depth 'documents'}}documents/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/if}}
+
+        {{#if commands}}
+            <li class="chapter">
+                <div class="simple menu-toggler" data-toggle="collapse"
+                    {{#compare menu "===" 'normal' }}
+                     data-target="#commands-links"
+                    {{else}}
+                     data-target="#xs-documents-links"
+                    {{/compare}}>
+                    <span class="fa fa-fw fa-terminal"></span>
+                    <span>ngRx Commands</span>
+                    <span class="fa {{#isNotToggle 'commands'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+                </div>
+                <ul class="links collapse {{#isNotToggle 'commands'}}in{{/isNotToggle}}"
+                    {{#compare menu "===" 'normal' }}
+                    id="commands-links"
+                    {{else}}
+                    id="xs-commands-links"
+                    {{/compare}}>
+                    {{#each commands}}
+                        <li class="link">
+                            <a href="{{relativeURL ../depth 'commands'}}commands/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/if}}
+
+        <hr>
 
         {{#if miscellaneous}}
         <li class="chapter">
