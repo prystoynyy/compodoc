@@ -342,11 +342,11 @@ export class DependenciesEngine {
     }
 
     public getCommands() {
-        return this.events;
+        return this.commands;
     }
 
     public getDocuments() {
-        return this.events;
+        return this.documents;
     }
 
     public getMiscellaneous() {

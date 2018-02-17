@@ -810,7 +810,7 @@ export class Application {
                     }
                     this.configuration.addPage({
                         path: 'events',
-                        name: this.configuration.mainData.events[i].name + 'Event',
+                        name: this.configuration.mainData.events[i].name + 'Action',
                         id: this.configuration.mainData.events[i].id,
                         context: 'event',
                         class: this.configuration.mainData.events[i],
@@ -829,8 +829,7 @@ export class Application {
 
     public prepareDocuments = (someDocuments?) => {
         logger.info('Prepare documents');
-        this.configuration.mainData.documents = (someDocuments) ? someDocuments : this.dependenciesEngine.getEvents();
-
+        this.configuration.mainData.documents = (someDocuments) ? someDocuments : this.dependenciesEngine.getDocuments();
         return new Promise((resolve, reject) => {
             let i = 0;
             let len = this.configuration.mainData.documents.length;
@@ -843,7 +842,7 @@ export class Application {
                     }
                     this.configuration.addPage({
                         path: 'documents',
-                        name: this.configuration.mainData.documents[i].name,
+                        name: this.configuration.mainData.documents[i].name + 'Action',
                         id: this.configuration.mainData.documents[i].id,
                         context: 'document',
                         class: this.configuration.mainData.documents[i],
@@ -862,7 +861,7 @@ export class Application {
 
     public prepareCommands = (someCommands?) => {
             logger.info('Prepare commands');
-            this.configuration.mainData.commands = (someCommands) ? someCommands : this.dependenciesEngine.getEvents();
+            this.configuration.mainData.commands = (someCommands) ? someCommands : this.dependenciesEngine.getCommands();
 
             return new Promise((resolve, reject) => {
                 let i = 0;
@@ -876,9 +875,9 @@ export class Application {
                         }
                         this.configuration.addPage({
                             path: 'commands',
-                            name: this.configuration.mainData.commands[i].name,
+                            name: this.configuration.mainData.commands[i].name + 'Action',
                             id: this.configuration.mainData.commands[i].id,
-                            context: 'document',
+                            context: 'command',
                             class: this.configuration.mainData.commands[i],
                             depth: 1,
                             pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL

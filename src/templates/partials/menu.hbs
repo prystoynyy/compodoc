@@ -220,7 +220,7 @@
                 {{/compare}}>
                 {{#each events}}
                     <li class="link">
-                        <a href="{{relativeURL ../depth 'events'}}events/{{name}}Event.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                        <a href="{{relativeURL ../depth 'events'}}events/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
                     </li>
                 {{/each}}
             </ul>
@@ -236,7 +236,7 @@
                     data-target="#xs-documents-links"
                 {{/compare}}>
                 <span class="fa fa-fw fa-file-code-o"></span>
-                <span>documents</span>
+                <span>Documents</span>
                 <span class="fa {{#isNotToggle 'documents'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
             </div>
             <ul class="links collapse {{#isNotToggle 'documents'}}in{{/isNotToggle}}"
@@ -247,7 +247,34 @@
                 {{/compare}}>
                 {{#each documents}}
                     <li class="link">
-                        <a href="{{relativeURL ../depth 'documents'}}documents/{{name}}" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                        <a href="{{relativeURL ../depth 'documents'}}documents/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/if}}
+
+        {{#if commands}}
+        <li class="chapter">
+            <div class="simple menu-toggler" data-toggle="collapse"
+                {{#compare menu "===" 'normal' }}
+                    data-target="#commands-links"
+                {{else}}
+                    data-target="#xs-documents-links"
+                {{/compare}}>
+                <span class="fa fa-fw fa-file-code-o"></span>
+                <span>Commands</span>
+                <span class="fa {{#isNotToggle 'commands'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+            </div>
+            <ul class="links collapse {{#isNotToggle 'commands'}}in{{/isNotToggle}}"
+                {{#compare menu "===" 'normal' }}
+                    id="commands-links"
+                {{else}}
+                    id="xs-commands-links"
+                {{/compare}}>
+                {{#each commands}}
+                    <li class="link">
+                        <a href="{{relativeURL ../depth 'commands'}}commands/{{name}}Action.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
                     </li>
                 {{/each}}
             </ul>
