@@ -1,10 +1,10 @@
-function Event(target?) {
+function _Event(target?) {
     return target;
 }
 
 class EventAction {}
 
-@Event()
+@_Event()
 export class TestLoadEvent extends EventAction {
 
 }
