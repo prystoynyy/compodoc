@@ -88,6 +88,7 @@ export class Dependencies {
             events: [],
             commands: [],
             documents: [],
+            effects: [],
             pipes: [],
             directives: [],
             routes: [],
@@ -358,7 +359,10 @@ export class Dependencies {
                             if (IO.accessors) {
                                 injectableDeps.accessors = IO.accessors;
                             }
-                            if (IO.implements && IO.implements.length > 0) {
+                            // we have an Injectable that ends with Effects and thus it must be one...
+                            if (name.endsWith('Effects')) {
+                                outputSymbols.effects.push({...injectableDeps, type: 'class', id: 'effect-' + name + '-' + Date.now()});
+                            } else if (IO.implements && IO.implements.length > 0) {
                                 if (_.indexOf(IO.implements, 'HttpInterceptor') >= 0) {
                                     outputSymbols.interceptors.push(injectableDeps);
                                 } else {

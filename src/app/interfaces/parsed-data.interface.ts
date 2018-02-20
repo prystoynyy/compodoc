@@ -11,6 +11,7 @@ export interface ParsedData {
     events;
     documents;
     commands;
+    effects;
     miscellaneous;
     routesTree;
 }

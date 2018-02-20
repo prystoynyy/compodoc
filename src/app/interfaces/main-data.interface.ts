@@ -21,6 +21,7 @@ export interface MainDataInterface {
     pipes: any;
     classes: any;
     events: any;
+    effects: any;
     documents: any;
     commands: any;
     interfaces: any;

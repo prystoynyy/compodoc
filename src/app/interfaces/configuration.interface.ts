@@ -3,7 +3,7 @@ import { PageInterface } from './page.interface';
 
 export interface ConfigurationInterface {
     mainData: MainDataInterface;
-    pages:PageInterface[];
+    pages: PageInterface[];
     addPage(page: PageInterface): void;
     addAdditionalPage(page: PageInterface): void;
     resetPages(): void;

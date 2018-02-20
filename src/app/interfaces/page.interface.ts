@@ -7,6 +7,7 @@ export interface PageInterface {
     module?: any;
     pipe?: any;
     class?: any;
+    effect?: any;
     event?: any;
     document?: any;
     command?: any;

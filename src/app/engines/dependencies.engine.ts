@@ -35,6 +35,7 @@ export class DependenciesEngine {
     public pipes: Object[];
     public classes: Object[];
     public events: Object[];
+    public effects: Object[];
     public documents: Object[];
     public commands: Object[];
     public miscellaneous: MiscellaneousData;
@@ -126,6 +127,7 @@ export class DependenciesEngine {
         this.events = _.sortBy(this.rawData.events, ['name']);
         this.commands = _.sortBy(this.rawData.commands, ['name']);
         this.documents = _.sortBy(this.rawData.documents, ['name']);
+        this.effects = _.sortBy(this.rawData.effects, ['name']);
         this.miscellaneous = this.rawData.miscellaneous;
         this.prepareMiscellaneous();
         this.updateModulesDeclarationsExportsTypes();
@@ -347,6 +349,10 @@ export class DependenciesEngine {
 
     public getDocuments() {
         return this.documents;
+    }
+
+    public getEffects() {
+        return this.effects;
     }
 
     public getMiscellaneous() {

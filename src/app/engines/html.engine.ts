@@ -40,6 +40,8 @@ export class HtmlEngine {
             'class',
             'events',
             'event',
+            'effect',
+            'effects',
             'document',
             'documents',
             'command',

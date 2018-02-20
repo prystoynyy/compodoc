@@ -433,6 +433,10 @@ export class Application {
             actions.push(() => this.prepareDocuments());
         }
 
+        if (diffCrawledData.effects.length > 0) {
+            actions.push(() => this.prepareEffects());
+        }
+
         if (diffCrawledData.interfaces.length > 0) {
             actions.push(() => this.prepareInterfaces());
         }
@@ -531,6 +535,10 @@ export class Application {
 
         if (this.dependenciesEngine.commands.length > 0) {
             actions.push(() => { return this.prepareCommands(); });
+        }
+
+        if (this.dependenciesEngine.effects.length > 0) {
+            actions.push(() => { return this.prepareEffects(); });
         }
 
         if (this.dependenciesEngine.interfaces.length > 0) {
@@ -795,7 +803,7 @@ export class Application {
     }
 
     public prepareEvents = (someEvents?) => {
-        logger.info('Prepare events');
+        logger.info('Prepare ngRx events');
         this.configuration.mainData.events = (someEvents) ? someEvents : this.dependenciesEngine.getEvents();
 
         return new Promise((resolve, reject) => {
@@ -825,10 +833,10 @@ export class Application {
             };
             loop();
         });
-    };
+    }
 
     public prepareDocuments = (someDocuments?) => {
-        logger.info('Prepare documents');
+        logger.info('Prepare ngRx documents');
         this.configuration.mainData.documents = (someDocuments) ? someDocuments : this.dependenciesEngine.getDocuments();
         return new Promise((resolve, reject) => {
             let i = 0;
@@ -857,10 +865,10 @@ export class Application {
             };
             loop();
         });
-    };
+    }
 
     public prepareCommands = (someCommands?) => {
-            logger.info('Prepare commands');
+            logger.info('Prepare ngRx commands');
             this.configuration.mainData.commands = (someCommands) ? someCommands : this.dependenciesEngine.getCommands();
 
             return new Promise((resolve, reject) => {
@@ -890,7 +898,40 @@ export class Application {
                 };
                 loop();
             });
-        }
+    }
+
+    public prepareEffects = (someEffects?) => {
+            logger.info('Prepare ngRx effects');
+            this.configuration.mainData.effects = (someEffects) ? someEffects : this.dependenciesEngine.getEffects();
+
+            return new Promise((resolve, reject) => {
+                let i = 0;
+                let len = this.configuration.mainData.effects.length;
+                let loop = () => {
+                    if (i < len) {
+                        if ($markdownengine.hasNeighbourReadmeFile(this.configuration.mainData.effects[i].file)) {
+                            logger.info(` ${this.configuration.mainData.effects[i].name} has a README file, include it`);
+                            let readme = $markdownengine.readNeighbourReadmeFile(this.configuration.mainData.effects[i].file);
+                            this.configuration.mainData.effects[i].readme = marked(readme);
+                        }
+                        this.configuration.addPage({
+                            path: 'effects',
+                            name: this.configuration.mainData.effects[i].name + 'Effect',
+                            id: this.configuration.mainData.effects[i].id,
+                            context: 'effect',
+                            class: this.configuration.mainData.effects[i],
+                            depth: 1,
+                            pageType: COMPODOC_DEFAULTS.PAGE_TYPES.INTERNAL
+                        });
+                        i++;
+                        loop();
+                    } else {
+                        resolve();
+                    }
+                };
+                loop();
+            });
+    }
 
     public prepareInterfaces(someInterfaces?) {
         logger.info('Prepare interfaces');

@@ -391,6 +391,33 @@
             </li>
         {{/if}}
 
+        {{#if effects}}
+            <li class="chapter">
+                <div class="simple menu-toggler" data-toggle="collapse"
+                    {{#compare menu "===" 'normal' }}
+                     data-target="#effects-links"
+                    {{else}}
+                     data-target="#xs-documents-links"
+                    {{/compare}}>
+                    <span class="fa fa-fw fa-code-fork"></span>
+                    <span>ngRx Effects</span>
+                    <span class="fa {{#isNotToggle 'effects'}}fa-angle-up{{else}}fa-angle-down{{/isNotToggle}}"></span>
+                </div>
+                <ul class="links collapse {{#isNotToggle 'effects'}}in{{/isNotToggle}}"
+                    {{#compare menu "===" 'normal' }}
+                    id="effects-links"
+                    {{else}}
+                    id="xs-effects-links"
+                    {{/compare}}>
+                    {{#each effects}}
+                        <li class="link">
+                            <a href="{{relativeURL ../depth 'effects'}}effects/{{name}}Effect.html" {{#compare ../id "===" id }} data-type="entity-link" class="active" {{/compare}}>{{ name }}</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/if}}
+
         <hr>
 
         {{#if miscellaneous}}

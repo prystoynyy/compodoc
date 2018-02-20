@@ -110,6 +110,13 @@
                         {{~> document data ~}}
                    {{/compare}}
 
+                   {{#compare data.context "===" 'effects'}}
+                        {{~> effects data ~}}
+                   {{/compare}}
+                   {{#compare data.context "===" 'effect'}}
+                        {{~> effect data ~}}
+                   {{/compare}}
+
                    {{#compare data.context "===" 'interface'}}
                         {{~> interface data ~}}
                    {{/compare}}
