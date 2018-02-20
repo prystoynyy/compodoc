@@ -247,13 +247,13 @@ export class Dependencies {
 
         // classes having special decorators and are extending special classes
         // are handled specifically...
-        if (_hasDecorator('Event') && _extends('EventAction')) {
+        if (_hasDecorator('_Event') && _extends('EventAction')) {
             // adjust id for events...
             outputSymbols.events.push({...deps, id: 'event-' + name + '-' + Date.now()});
-        } else if (_hasDecorator('Document') && _extends('DocumentAction')) {
+        } else if (_hasDecorator('_Document') && _extends('DocumentAction')) {
             // adjust id for documents...
             outputSymbols.documents.push({...deps, id: 'document-' + name + '-' + Date.now()});
-        } else if (_hasDecorator('Command') && _extends('CommandAction')) {
+        } else if (_hasDecorator('_Command') && _extends('CommandAction')) {
             // adjust id for commands...
             outputSymbols.commands.push({...deps, id: 'command-' + name + '-' + Date.now()});
         } else { // otherwise, they are just classes

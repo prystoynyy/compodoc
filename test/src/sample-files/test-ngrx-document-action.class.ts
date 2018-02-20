@@ -1,10 +1,10 @@
-function Document(target?) {
+function _Document(target?) {
     return target;
 }
 
 class DocumentAction {}
 
-@Document()
+@_Document()
 export class TestDocument extends DocumentAction {
 
 }
