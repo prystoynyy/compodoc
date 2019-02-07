@@ -63,7 +63,8 @@ export class Configuration implements ConfigurationInterface {
         angularVersion: '',
         exportFormat: COMPODOC_DEFAULTS.exportFormat,
         coverageData: {},
-        customFavicon: ''
+        customFavicon: '',
+        workingDirectory: ''
     };
 
     public addPage(page: PageInterface) {

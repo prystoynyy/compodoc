@@ -59,4 +59,5 @@ export interface MainDataInterface {
     packageDependencies: Object[];
     gaID: string;
     gaSite: string;
+    workingDirectory: string;
 }

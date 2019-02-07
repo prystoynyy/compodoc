@@ -35,6 +35,7 @@ export class CliApplication extends Application {
             .version(pkg.version)
             .usage('<src> [options]')
             .option('-p, --tsconfig [config]', 'A tsconfig.json file')
+            .option('--workingDirectory [folder]', 'Working directory with source files to include')
             .option('-d, --output [folder]', 'Where to store the generated documentation', COMPODOC_DEFAULTS.folder)
             .option('-y, --extTheme [file]', 'External styling theme file')
             .option('-n, --name [name]', 'Title documentation', COMPODOC_DEFAULTS.title)
@@ -184,6 +185,10 @@ export class CliApplication extends Application {
             this.configuration.mainData.gaSite = program.gaSite;
         }
 
+        if (program.workingDirectory) {
+            this.configuration.mainData.workingDirectory = program.workingDirectory;
+        }
+
         if (!this.isWatching) {
             console.log(fs.readFileSync(path.join(__dirname, '../src/banner')).toString());
             console.log(pkg.version);
@@ -236,8 +241,14 @@ export class CliApplication extends Application {
                         path.basename(this.configuration.mainData.tsconfig)
                     );
                     // use the current directory of tsconfig.json as a working directory
-                    cwd = _file.split(path.sep).slice(0, -1).join(path.sep);
+                    if (this.configuration.mainData.workingDirectory) {
+                        cwd = this.configuration.mainData.workingDirectory;
+                    } else {
+                        cwd = _file.split(path.sep).slice(0, -1).join(path.sep);
+                    }
                     logger.info('Using tsconfig', _file);
+                    logger.info('Working directory is ', cwd);
+
 
                     let tsConfigFile = readConfig(_file);
                     files = tsConfigFile.files;
